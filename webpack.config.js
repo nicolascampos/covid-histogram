@@ -7,7 +7,7 @@ const APP_DIR = path.join(__dirname, 'src');
 
 module.exports = {
   entry: {
-    bundle: `${APP_DIR}/app.js`,
+    bundle: `${APP_DIR}/index.js`,
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
