@@ -2,14 +2,15 @@
 /* eslint-disable react/react-in-jsx-scope */
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 
 import store from './store';
 
-import { fetchResources } from './constants/actions';
+import App from './App/App';
 
 ReactDOM.render(
-  <p>Test</p>,
+  <Provider store={store}>
+    <App />
+  </Provider>,
   document.getElementById('root'),
 );
-
-store.dispatch(fetchResources());
