@@ -5,11 +5,11 @@ import ReactDOM from 'react-dom';
 
 import store from './store';
 
-import { testAction } from './constants/actions';
+import { fetchResources } from './constants/actions';
 
 ReactDOM.render(
   <p>Test</p>,
   document.getElementById('root'),
 );
 
-store.dispatch(testAction('Test'));
+store.dispatch(fetchResources());

@@ -1,17 +1,26 @@
-import { TEST_ACTION } from '../constants/actions';
+import {
+    FETCH_RESOURCES,
+    FETCH_RESOURCES_FAIL,
+} from '../constants/actions';
 
 const initialState = {
-    text: '',
+    data: [],
+    error: null,
 };
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case TEST_ACTION:
+        case FETCH_RESOURCES:
             state = {
                 ...state,
-                text: action.payload.text
+                data: action.payload.data
             }
-            console.log(state);
+            break;
+        case FETCH_RESOURCES_FAIL:
+            state = {
+                ...state,
+                error: action.payload.error
+            }
             break;
         default:
             break;
