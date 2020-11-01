@@ -11,17 +11,15 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case FETCH_RESOURCES:
-      state = {
+      return {
         ...state,
-        data: action.payload.data
-      }
-      break;
+        data: action.payload.data,
+      };
     case FETCH_RESOURCES_FAIL:
-      state = {
+      return {
         ...state,
-        error: action.payload.error
-      }
-      break;
+        error: action.payload.error,
+      };
     default:
       break;
   }

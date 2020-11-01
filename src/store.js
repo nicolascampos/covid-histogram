@@ -5,5 +5,5 @@ import rootReducer from './App/reducers/rootReducer';
 
 export default createStore(
   rootReducer,
-  applyMiddleware(thunk)
+  applyMiddleware(thunk),
 );

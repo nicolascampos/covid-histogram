@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import highcharts from 'highcharts';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 
 const Histogram = ({ data }) => {
   useEffect(() => {
@@ -8,50 +9,58 @@ const Histogram = ({ data }) => {
     const infected = data.map((day) => day.positiveIncrease);
     const deseased = data.map((day) => day.deathIncrease);
 
+    /* eslint-disable no-unused-vars */
     const chart = highcharts.chart('histogram', {
       chart: {
-        type: 'column'
+        type: 'column',
       },
       title: {
-        text: 'Covid infected in the US'
+        text: 'Covid statistics in the US',
       },
       tooltip: {
-        shared: true
+        shared: true,
       },
       xAxis: {
-        categories: days
+        categories: days,
       },
       yAxis: [{
         title: {
-          text: 'Infected'
+          text: 'Infected',
         },
       }, {
         title: {
-          text: 'Diseased'
+          text: 'Diseased',
         },
-        opposite: true
+        opposite: true,
       }],
       plotOptions: {
         column: {
           pointPadding: 0,
           borderWidth: 0,
           groupPadding: 0,
-          shadow: false
-        }
+          shadow: false,
+        },
       },
       series: [{
         name: 'Infected',
-        data: infected
+        data: infected,
       }, {
         name: 'Diseased',
         data: deseased,
         type: 'line',
-        yAxis: 1
+        yAxis: 1,
       }],
     });
   });
 
-  return <div id="histogram"></div>;
-}
+  return <div id="histogram" />;
+};
+
+Histogram.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.shape({
+    positiveIncrease: PropTypes.number,
+    deathIncrease: PropTypes.number,
+  })).isRequired,
+};
 
 export default Histogram;
