@@ -1,9 +1,14 @@
 export const FETCH_RESOURCES = 'FETCH_RESOURCES';
 export const FETCH_RESOURCES_FAIL = 'FETCH_RESOURCES_FAIL';
 export const SET_DAYS_RANGE = 'SET_DAYS_RANGE';
+export const SET_STATE = 'SET_STATE';
 
-export const fetchResources = (daysRange) => (dispatch) => {
-  fetch('https://api.covidtracking.com/v1/us/daily.json')
+export const fetchResources = (daysRange, stateCode = '') => (dispatch) => {
+  const apiUrl = stateCode 
+    ? `https://api.covidtracking.com/v1/states/${stateCode}/daily.json`
+    :'https://api.covidtracking.com/v1/us/daily.json';
+
+  fetch(apiUrl)
     .then((response) => response.json())
     .then((data) => {
       const filteredData = daysRange
@@ -23,12 +28,31 @@ export const fetchResources = (daysRange) => (dispatch) => {
     });
 };
 
-export const setDaysRange = (days) => (dispatch) => {
+export const setDaysRange = (days, stateCode = '') => (dispatch) => {
   const daysRange = Number(days);
 
   dispatch({
     type: SET_DAYS_RANGE,
     payload: { daysRange },
   });
-  dispatch(fetchResources(daysRange));
+  dispatch(fetchResources(daysRange, stateCode));
 };
+
+export const setState = (stateCode) => (dispatch) => {
+  dispatch({
+    type: SET_STATE,
+    payload: { stateCode },
+  });
+  dispatch(fetchResources(7, stateCode));
+};
+
+export const setUserInput = (userInput, inputSuggestions) => (dispatch) => {
+  dispatch({
+    type: SET_USER_INPUT,
+    payload: {
+      userInput,
+      inputSuggestions,
+    },
+  });
+};
+

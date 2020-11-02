@@ -9,5 +9,12 @@
   &_filtersBar {
     display: flex;
     margin: 14px 0;
+
+    &_span {
+      align-self: center;
+      color: rgba($color: black, $alpha: 0.8);
+      cursor: pointer;
+      text-decoration: underline;
+    }
   }
 }

@@ -3,8 +3,13 @@ import highcharts from 'highcharts';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 
-const Histogram = ({ data }) => {
+import states from '../../constants/statesCodes';
+
+const Histogram = ({ data, stateCode }) => {
   useEffect(() => {
+    const stateName = stateCode 
+      ? states.find((state) => state.code === stateCode).name
+      : 'the US';
     const days = data.map((day) => moment(day.dateChecked).format('MMM D'));
     const infected = data.map((day) => day.positiveIncrease);
     const deceased = data.map((day) => day.deathIncrease);
@@ -18,7 +23,7 @@ const Histogram = ({ data }) => {
         type: 'column',
       },
       title: {
-        text: 'Covid statistics in the US',
+        text: `Covid statistics in ${stateName}`,
       },
       tooltip: {
         shared: true,
@@ -80,6 +85,7 @@ Histogram.propTypes = {
     positiveIncrease: PropTypes.number,
     deathIncrease: PropTypes.number,
   })).isRequired,
+  stateCode: PropTypes.string,
 };
 
 export default Histogram;
