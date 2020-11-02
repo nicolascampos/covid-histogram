@@ -4,9 +4,9 @@ export const SET_DAYS_RANGE = 'SET_DAYS_RANGE';
 export const SET_STATE = 'SET_STATE';
 
 export const fetchResources = (daysRange, stateCode = '') => (dispatch) => {
-  const apiUrl = stateCode 
+  const apiUrl = stateCode
     ? `https://api.covidtracking.com/v1/states/${stateCode}/daily.json`
-    :'https://api.covidtracking.com/v1/us/daily.json';
+    : 'https://api.covidtracking.com/v1/us/daily.json';
 
   fetch(apiUrl)
     .then((response) => response.json())
@@ -45,14 +45,3 @@ export const setState = (stateCode) => (dispatch) => {
   });
   dispatch(fetchResources(7, stateCode));
 };
-
-export const setUserInput = (userInput, inputSuggestions) => (dispatch) => {
-  dispatch({
-    type: SET_USER_INPUT,
-    payload: {
-      userInput,
-      inputSuggestions,
-    },
-  });
-};
-

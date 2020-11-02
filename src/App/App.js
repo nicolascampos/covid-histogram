@@ -31,7 +31,7 @@ class App extends React.Component {
   handleStateChange(e) {
     const { setState } = this.props;
     const stateCode = e.target.getAttribute('statecode')
-      ?  e.target.getAttribute('statecode')
+      ? e.target.getAttribute('statecode')
       : '';
 
     setState(stateCode);
@@ -39,14 +39,17 @@ class App extends React.Component {
 
   render() {
     const { data, stateCode, setState } = this.props;
-    const nationwideStatsSpan = () => {
-      return stateCode
-        ? <span
-            className="appContainer_filtersBar_span"
-            onClick={() => setState('')}
-          >Show nationwide statistics</span>
-        : null;
-    };
+    const nationwideStatsSpan = () => (stateCode
+      ? (
+        <span
+          role="button"
+          className="appContainer_filtersBar_span"
+          onClick={() => setState('')}
+        >
+          Show nationwide statistics
+        </span>
+      )
+      : null);
 
     return (
       <div className="appContainer">

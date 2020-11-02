@@ -7,7 +7,7 @@ import states from '../../constants/statesCodes';
 
 const Histogram = ({ data, stateCode }) => {
   useEffect(() => {
-    const stateName = stateCode 
+    const stateName = stateCode
       ? states.find((state) => state.code === stateCode).name
       : 'the US';
     const days = data.map((day) => moment(day.dateChecked).format('MMM D'));
