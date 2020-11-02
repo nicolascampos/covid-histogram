@@ -1,13 +1,18 @@
 export const FETCH_RESOURCES = 'FETCH_RESOURCES';
 export const FETCH_RESOURCES_FAIL = 'FETCH_RESOURCES_FAIL';
+export const SET_DAYS_RANGE = 'SET_DAYS_RANGE';
 
-export const fetchResources = () => (dispatch) => {
+export const fetchResources = (daysRange) => (dispatch) => {
   fetch('https://api.covidtracking.com/v1/us/daily.json')
     .then((response) => response.json())
     .then((data) => {
+      const filteredData = daysRange
+        ? data.slice(0, daysRange).reverse()
+        : data.reverse();
+
       dispatch({
         type: FETCH_RESOURCES,
-        payload: { data: data.slice(0, 7) },
+        payload: { data: filteredData },
       });
     })
     .catch((error) => {
@@ -16,4 +21,14 @@ export const fetchResources = () => (dispatch) => {
         payload: { error },
       });
     });
+};
+
+export const setDaysRange = (days) => (dispatch) => {
+  const daysRange = Number(days);
+
+  dispatch({
+    type: SET_DAYS_RANGE,
+    payload: { daysRange },
+  });
+  dispatch(fetchResources(daysRange));
 };

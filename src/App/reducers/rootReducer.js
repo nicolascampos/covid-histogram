@@ -1,10 +1,12 @@
 import {
   FETCH_RESOURCES,
   FETCH_RESOURCES_FAIL,
+  SET_DAYS_RANGE,
 } from '../constants/actions';
 
 const initialState = {
   data: [],
+  daysRange: 7,
   error: null,
 };
 
@@ -19,6 +21,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         error: action.payload.error,
+      };
+    case SET_DAYS_RANGE:
+      return {
+        ...state,
+        daysRange: action.payload.daysRange,
       };
     default:
       break;

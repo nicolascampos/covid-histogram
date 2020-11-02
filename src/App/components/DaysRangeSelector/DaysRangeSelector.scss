@@ -1,0 +1,11 @@
+.daysRangeSelector {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  margin-left: auto;
+  max-width: 300px;
+
+  &_dropdown {
+    margin: 0 10px;
+  }
+}

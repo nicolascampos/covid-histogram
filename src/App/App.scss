@@ -1,8 +1,13 @@
 @import './assets/styles/normalize.css';
 @import './assets/styles/skeleton.css';
 
-.container {
+.appContainer {
   margin: 0 auto;
-  max-width: 1280px;
+  max-width: 960px;
   padding: 40px 0;
+
+  &_filtersBar {
+    display: flex;
+    margin: 14px 0;
+  }
 }

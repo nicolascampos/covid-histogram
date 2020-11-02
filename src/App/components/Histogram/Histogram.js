@@ -7,7 +7,10 @@ const Histogram = ({ data }) => {
   useEffect(() => {
     const days = data.map((day) => moment(day.dateChecked).format('MMM D'));
     const infected = data.map((day) => day.positiveIncrease);
-    const deseased = data.map((day) => day.deathIncrease);
+    const deceased = data.map((day) => day.deathIncrease);
+
+    const infectedColor = highcharts.getOptions().colors[0];
+    const deceasedColor = highcharts.getOptions().colors[1];
 
     /* eslint-disable no-unused-vars */
     const chart = highcharts.chart('histogram', {
@@ -24,12 +27,28 @@ const Histogram = ({ data }) => {
         categories: days,
       },
       yAxis: [{
+        labels: {
+          style: {
+            color: infectedColor,
+          },
+        },
         title: {
           text: 'Infected',
+          style: {
+            color: infectedColor,
+          },
         },
       }, {
+        labels: {
+          style: {
+            color: deceasedColor,
+          },
+        },
         title: {
-          text: 'Diseased',
+          text: 'Deceased',
+          style: {
+            color: deceasedColor,
+          },
         },
         opposite: true,
       }],
@@ -45,8 +64,8 @@ const Histogram = ({ data }) => {
         name: 'Infected',
         data: infected,
       }, {
-        name: 'Diseased',
-        data: deseased,
+        name: 'Deceased',
+        data: deceased,
         type: 'line',
         yAxis: 1,
       }],
