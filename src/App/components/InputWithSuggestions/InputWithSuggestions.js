@@ -1,11 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import './InputWithSuggestions.scss';
 
-const InputWithSuggestions = ({ options, maxSuggestions, handleStateChange }) => {
+const InputWithSuggestions = ({
+  options,
+  maxSuggestions,
+  stateCode,
+  handleStateChange,
+}) => {
   const [userInput, setUserInput] = useState('');
   const [suggestions, setSuggestions] = useState([]);
+
+  useEffect(() => {
+    if (stateCode === '') {
+      setUserInput('');
+    }
+  }, [stateCode]);
 
   const handleClick = (e) => {
     handleStateChange(e);
@@ -63,6 +74,7 @@ InputWithSuggestions.propTypes = {
     name: PropTypes.string,
     code: PropTypes.string,
   })).isRequired,
+  stateCode: PropTypes.string,
   maxSuggestions: PropTypes.number.isRequired,
   handleStateChange: PropTypes.func.isRequired,
 };

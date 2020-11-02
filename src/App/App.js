@@ -57,7 +57,8 @@ class App extends React.Component {
         <div className="appContainer_filtersBar">
           <InputWithSuggestions
             options={states}
-            maxSuggestions="5"
+            stateCode={stateCode}
+            maxSuggestions={5}
             handleStateChange={this.handleStateChange.bind(this)}
           />
           {nationwideStatsSpan()}
